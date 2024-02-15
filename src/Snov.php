@@ -2,7 +2,11 @@
 
 namespace HelgeSverre\Snov;
 
-use HelgeSverre\Snov\Resource\Chat;
+use HelgeSverre\Snov\Resource\DripCampaigns;
+use HelgeSverre\Snov\Resource\EmailFinder;
+use HelgeSverre\Snov\Resource\EmailVerifier;
+use HelgeSverre\Snov\Resource\ProspectManagement;
+use HelgeSverre\Snov\Resource\UserAccount;
 use Saloon\Http\Connector;
 use Saloon\Traits\Plugins\AcceptsJson;
 use Saloon\Traits\Plugins\HasTimeout;
@@ -21,26 +25,31 @@ class Snov extends Connector
 
     public function resolveBaseUrl(): string
     {
-        return $this->baseUrl ?: 'https://api.mistral.ai/v1';
+        return 'https://api.snov.io';
     }
 
-    public function chat(): Chat
+    public function dripCampaigns(): DripCampaigns
     {
-        return new Chat($this);
+        return new DripCampaigns($this);
     }
 
-    public function simpleChat(): SimpleChat
+    public function emailFinder(): EmailFinder
     {
-        return new SimpleChat($this);
+        return new EmailFinder($this);
     }
 
-    public function embedding(): Embedding
+    public function emailVerifier(): EmailVerifier
     {
-        return new Embedding($this);
+        return new EmailVerifier($this);
     }
 
-    public function models(): Models
+    public function prospectManagement(): ProspectManagement
     {
-        return new Models($this);
+        return new ProspectManagement($this);
+    }
+
+    public function userAccount(): UserAccount
+    {
+        return new UserAccount($this);
     }
 }
