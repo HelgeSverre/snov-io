@@ -20,7 +20,7 @@ class EmailFinderRequest extends Request
     public function __construct(
         protected mixed $firstName,
         protected mixed $lastName,
-        protected mixed $domain
+        protected mixed $domain,
     ) {
     }
 

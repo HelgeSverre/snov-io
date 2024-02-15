@@ -15,12 +15,12 @@ class ChangeRecipientsStatusRequest extends Request
     /**
      * @var mixed The prospect’s email address.
      * @var mixed The campaign’s id. You can find it in the URL when you view the campaign info (show an example).
-     * @var mixed New status for the recipient. Can contain Active, Paused, Finished, Unsubscribed, Auto-replied, Replied, Replied from another email. You can not change the recipients\' status if their status is Finished or Moved.
+     * @var mixed New status for the recipient. Can contain Active, Paused, Finished, Unsubscribed, Auto-replied, Replied, Replied from another email. You can not change the recipients' status if their status is Finished or Moved.
      **/
     public function __construct(
         protected mixed $email,
         protected mixed $campaignId,
-        protected mixed $status
+        protected mixed $status,
     ) {
     }
 

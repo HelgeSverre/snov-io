@@ -16,7 +16,7 @@ class CreateNewProspectListRequest extends Request
      * @var mixed The name of the new prospect list.
      **/
     public function __construct(
-        protected mixed $name
+        protected mixed $name,
     ) {
     }
 

@@ -18,7 +18,7 @@ class AddToDoNotEmailListRequest extends Request
      **/
     public function __construct(
         protected mixed $items,
-        protected mixed $listId
+        protected mixed $listId,
     ) {
     }
 

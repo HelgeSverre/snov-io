@@ -20,7 +20,7 @@ class ViewProspectsInListRequest extends Request
     public function __construct(
         protected mixed $listId,
         protected mixed $page,
-        protected mixed $perPage
+        protected mixed $perPage,
     ) {
     }
 

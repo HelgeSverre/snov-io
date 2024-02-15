@@ -1,7 +1,8 @@
 {
     "preset": "laravel",
     "rules": {
-        "fully_qualified_strict_types": false,
+        "fully_qualified_strict_types": true,
+        "no_leading_import_slash": true,
         "global_namespace_import": {
             "import_classes": true,
             "import_constants": true,

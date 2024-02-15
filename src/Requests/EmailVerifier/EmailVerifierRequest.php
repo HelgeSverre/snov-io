@@ -16,7 +16,7 @@ class EmailVerifierRequest extends Request
      * @var mixed The email addresses you need to verify.
      **/
     public function __construct(
-        protected mixed $emails
+        protected mixed $emails,
     ) {
     }
 

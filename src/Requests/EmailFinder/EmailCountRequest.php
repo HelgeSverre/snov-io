@@ -16,7 +16,7 @@ class EmailCountRequest extends Request
      * @var mixed The name of the domain for which you`d like to know the number of emails in our database.
      **/
     public function __construct(
-        protected mixed $domain
+        protected mixed $domain,
     ) {
     }
 

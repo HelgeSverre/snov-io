@@ -16,7 +16,7 @@ class FindProspectByEmailRequest extends Request
      * @var mixed The prospect’s email address.
      **/
     public function __construct(
-        protected mixed $email
+        protected mixed $email,
     ) {
     }
 

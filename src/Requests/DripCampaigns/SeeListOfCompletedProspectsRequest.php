@@ -13,10 +13,10 @@ class SeeListOfCompletedProspectsRequest extends Request
     protected Method $method = Method::GET;
 
     /**
-     * @var mixed Сampaign\'s unique identifier to retrieve the prospects list.
+     * @var mixed Сampaign's unique identifier to retrieve the prospects list.
      **/
     public function __construct(
-        protected mixed $campaignId
+        protected mixed $campaignId,
     ) {
     }
 

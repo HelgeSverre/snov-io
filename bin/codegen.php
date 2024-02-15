@@ -44,22 +44,27 @@ foreach ($endpoints as $endpoint) {
     $classContent .= "use HasJsonBody;\n";
     $classContent .= 'protected Method $method = Method::'.strtoupper($endpoint['method']).";\n\n";
 
-    // Constructor and properties
-    $constructorParams = [];
-    $constructorComments = [];
-    foreach ($parameters as $param) {
-        $constructorParams[] = 'protected mixed $'.(Str::of($param['name'])->before('[')->trim()->camel());
-        $constructorComments[] = '@var mixed $'.($param['name']).' '.addslashes($param['description']);
-
-    }
-
+    // Constructor docblocks
     $classContent .= "/**\n";
-    $classContent .= implode("\n * ", $constructorComments);
+    foreach ($parameters as $param) {
+        $name = Str::of($param['name'])->before('[')->trim()->camel();
+        $classContent .= "\n* @var mixed $".$name.' '.$param['description'];
+    }
     $classContent .= "\n **/\n";
-    $classContent .= "public function __construct(\n".implode(", \n", $constructorParams)."\n) {}\n";
+
+    // Constructor parameters
+    $classContent .= "public function __construct(\n";
+    foreach ($parameters as $param) {
+        $name = Str::of($param['name'])->before('[')->trim()->camel();
+        $classContent .= 'protected mixed $'.$name.",\n";
+    }
+    $classContent .= ") {}\n";
+
+    // resolveEndpoint method
     $classContent .= "public function resolveEndpoint(): string\n";
     $classContent .= "{\n return '$path'; }\n";
 
+    // defaultBody method
     $classContent .= "public function defaultBody(): array\n    {\n";
     $classContent .= "return array_filter([\n";
 
@@ -103,16 +108,31 @@ foreach ($groups as $group => $endpoints) {
         $methodName = Str::of($endpoint['title'])->remove(['’', '.'])->camel();
         $requestClassName = ucfirst($methodName).'Request';
         $requestNamespace = "\\HelgeSverre\\Snov\\Requests\\$resourceName\\$requestClassName";
+        $description = Str::of($endpoint['description'])->squish()->replace('.', ".\n * ");
 
         // Generate method for the endpoint
         $classContent .= "    /**\n";
-        $classContent .= '     * '.$endpoint['description']."\n";
+        $classContent .= '     * '.$description."\n";
         $classContent .= "     *\n";
         $classContent .= "     * @return Response\n";
         $classContent .= "     */\n";
-        $classContent .= "    public function $methodName(array \$data): Response\n";
+        $classContent .= "    public function $methodName(\n";
+
+        foreach ($endpoint['inputParameters'] as $param) {
+            $name = Str::of($param['name'])->before('[')->trim()->camel();
+            $classContent .= '$'.$name.", \n";
+        }
+
+        $classContent .= "    ): Response\n";
         $classContent .= "    {\n";
-        $classContent .= "        return \$this->connector->send(new $requestNamespace(...\$data));\n";
+        $classContent .= "        return \$this->connector->send(new $requestNamespace(\n";
+
+        foreach ($endpoint['inputParameters'] as $param) {
+            $name = Str::of($param['name'])->before('[')->trim()->camel();
+            $classContent .= $name.': $'.$name.", \n";
+        }
+
+        $classContent .= "));\n";
         $classContent .= "    }\n\n";
     }
 

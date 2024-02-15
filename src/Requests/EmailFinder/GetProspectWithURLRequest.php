@@ -16,7 +16,7 @@ class GetProspectWithURLRequest extends Request
      * @var mixed A link to the prospect’s social media profile. Specify the name of the social network in the [brackets] (LinkedIn or X).
      **/
     public function __construct(
-        protected mixed $url
+        protected mixed $url,
     ) {
     }
 

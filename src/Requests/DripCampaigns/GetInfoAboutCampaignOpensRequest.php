@@ -16,7 +16,7 @@ class GetInfoAboutCampaignOpensRequest extends Request
      * @var mixed Unique identifier of the campaign for which you want to view information about email opens.
      **/
     public function __construct(
-        protected mixed $campaignId
+        protected mixed $campaignId,
     ) {
     }
 

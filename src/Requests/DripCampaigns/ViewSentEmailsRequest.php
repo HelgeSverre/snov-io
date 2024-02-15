@@ -16,7 +16,7 @@ class ViewSentEmailsRequest extends Request
      * @var mixed Unique identifier of the campaign for which you want to see sent emails.
      **/
     public function __construct(
-        protected mixed $campaignId
+        protected mixed $campaignId,
     ) {
     }
 

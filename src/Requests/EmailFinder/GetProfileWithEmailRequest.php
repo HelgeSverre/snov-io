@@ -16,7 +16,7 @@ class GetProfileWithEmailRequest extends Request
      * @var mixed The email address of the person you want to find additional information on.
      **/
     public function __construct(
-        protected mixed $email
+        protected mixed $email,
     ) {
     }
 

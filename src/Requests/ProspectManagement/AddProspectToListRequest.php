@@ -17,15 +17,15 @@ class AddProspectToListRequest extends Request
      * @var mixed The prospect’s full name.
      * @var mixed The prospect’s first name.
      * @var mixed The prospect’s last name.
-     * @var mixed Array with prospect\'s phone numbers.
+     * @var mixed Array with prospect's phone numbers.
      * @var mixed The prospect’s country. The country names are defined here. Please, only use countries from this list.
      * @var mixed The prospect’s locality.
      * @var mixed The prospect’s job title.
      * @var mixed The name of the prospect’s company.
      * @var mixed The prospect’s company website. Please, use the http://example.com format.
      * @var mixed Updates an existing prospect. Can contain true , or false . If true and a prospect with this email address already exists in one of the lists, the system will update the existing profile. If false , the system will not update the existing profile.
-     * @var mixed[specialization] You can add custom values into previously created custom fields. To do this specify the name of the custom field in the [brackets].
-     * @var mixed[linkedIn] A link to the prospect’s social media profile. Specify the name of the social network in the [brackets] (LinkedIn, Facebook, or X).
+     * @var mixed You can add custom values into previously created custom fields. To do this specify the name of the custom field in the [brackets].
+     * @var mixed A link to the prospect’s social media profile. Specify the name of the social network in the [brackets] (LinkedIn, Facebook, or X).
      * @var mixed The identifier of the list the prospect belongs to.
      **/
     public function __construct(
@@ -42,7 +42,7 @@ class AddProspectToListRequest extends Request
         protected mixed $updateContact,
         protected mixed $customFields,
         protected mixed $socialLinks,
-        protected mixed $listId
+        protected mixed $listId,
     ) {
     }
 

@@ -16,7 +16,7 @@ class SeeCampaignRepliesRequest extends Request
      * @var mixed Unique identifier of the campaign you want to view replies from.
      **/
     public function __construct(
-        protected mixed $campaignId
+        protected mixed $campaignId,
     ) {
     }
 

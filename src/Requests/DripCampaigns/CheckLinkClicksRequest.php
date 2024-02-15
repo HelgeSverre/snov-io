@@ -16,7 +16,7 @@ class CheckLinkClicksRequest extends Request
      * @var mixed Unique identifier of the campaign you want to view link clicks for.
      **/
     public function __construct(
-        protected mixed $campaignId
+        protected mixed $campaignId,
     ) {
     }
 
