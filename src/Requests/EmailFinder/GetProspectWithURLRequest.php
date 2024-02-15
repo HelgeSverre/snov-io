@@ -13,7 +13,7 @@ class GetProspectWithURLRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed A link to the prospect’s social media profile. Specify the name of the social network in the [brackets] (LinkedIn or X).
+     * @param  mixed  $url  A link to the prospect’s social media profile. Specify the name of the social network in the [brackets] (LinkedIn or X).
      **/
     public function __construct(
         protected mixed $url,

@@ -13,9 +13,9 @@ class ChangeRecipientsStatusRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed The prospect’s email address.
-     * @var mixed The campaign’s id. You can find it in the URL when you view the campaign info (show an example).
-     * @var mixed New status for the recipient. Can contain Active, Paused, Finished, Unsubscribed, Auto-replied, Replied, Replied from another email. You can not change the recipients' status if their status is Finished or Moved.
+     * @param  mixed  $email  The prospect’s email address.
+     * @param  mixed  $campaignId  The campaign’s id. You can find it in the URL when you view the campaign info (show an example).
+     * @param  mixed  $status  New status for the recipient. Can contain Active, Paused, Finished, Unsubscribed, Auto-replied, Replied, Replied from another email. You can not change the recipients' status if their status is Finished or Moved.
      **/
     public function __construct(
         protected mixed $email,

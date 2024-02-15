@@ -13,20 +13,20 @@ class AddProspectToListRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed The prospect’s email address.
-     * @var mixed The prospect’s full name.
-     * @var mixed The prospect’s first name.
-     * @var mixed The prospect’s last name.
-     * @var mixed Array with prospect's phone numbers.
-     * @var mixed The prospect’s country. The country names are defined here. Please, only use countries from this list.
-     * @var mixed The prospect’s locality.
-     * @var mixed The prospect’s job title.
-     * @var mixed The name of the prospect’s company.
-     * @var mixed The prospect’s company website. Please, use the http://example.com format.
-     * @var mixed Updates an existing prospect. Can contain true , or false . If true and a prospect with this email address already exists in one of the lists, the system will update the existing profile. If false , the system will not update the existing profile.
-     * @var mixed You can add custom values into previously created custom fields. To do this specify the name of the custom field in the [brackets].
-     * @var mixed A link to the prospect’s social media profile. Specify the name of the social network in the [brackets] (LinkedIn, Facebook, or X).
-     * @var mixed The identifier of the list the prospect belongs to.
+     * @param  mixed  $email  The prospect’s email address.
+     * @param  mixed  $fullName  The prospect’s full name.
+     * @param  mixed  $firstName  The prospect’s first name.
+     * @param  mixed  $lastName  The prospect’s last name.
+     * @param  mixed  $phones  Array with prospect's phone numbers.
+     * @param  mixed  $country  The prospect’s country. The country names are defined here. Please, only use countries from this list.
+     * @param  mixed  $locality  The prospect’s locality.
+     * @param  mixed  $position  The prospect’s job title.
+     * @param  mixed  $companyName  The name of the prospect’s company.
+     * @param  mixed  $companySite  The prospect’s company website. Please, use the http://example.com format.
+     * @param  mixed  $updateContact  Updates an existing prospect. Can contain true , or false . If true and a prospect with this email address already exists in one of the lists, the system will update the existing profile. If false , the system will not update the existing profile.
+     * @param  mixed  $customFields  You can add custom values into previously created custom fields. To do this specify the name of the custom field in the [brackets].
+     * @param  mixed  $socialLinks  A link to the prospect’s social media profile. Specify the name of the social network in the [brackets] (LinkedIn, Facebook, or X).
+     * @param  mixed  $listId  The identifier of the list the prospect belongs to.
      **/
     public function __construct(
         protected mixed $email,

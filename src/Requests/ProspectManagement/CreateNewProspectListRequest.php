@@ -13,7 +13,7 @@ class CreateNewProspectListRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed The name of the new prospect list.
+     * @param  mixed  $name  The name of the new prospect list.
      **/
     public function __construct(
         protected mixed $name,

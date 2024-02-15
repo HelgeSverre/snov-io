@@ -13,7 +13,7 @@ class GetProfileWithEmailRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed The email address of the person you want to find additional information on.
+     * @param  mixed  $email  The email address of the person you want to find additional information on.
      **/
     public function __construct(
         protected mixed $email,

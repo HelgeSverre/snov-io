@@ -2,6 +2,14 @@
 
 namespace HelgeSverre\Snov\Resources;
 
+use HelgeSverre\Snov\Requests\DripCampaigns\AddToDoNotEmailListRequest;
+use HelgeSverre\Snov\Requests\DripCampaigns\ChangeRecipientsStatusRequest;
+use HelgeSverre\Snov\Requests\DripCampaigns\CheckLinkClicksRequest;
+use HelgeSverre\Snov\Requests\DripCampaigns\GetInfoAboutCampaignOpensRequest;
+use HelgeSverre\Snov\Requests\DripCampaigns\SeeCampaignRepliesRequest;
+use HelgeSverre\Snov\Requests\DripCampaigns\SeeListOfCompletedProspectsRequest;
+use HelgeSverre\Snov\Requests\DripCampaigns\ViewAllCampaignsRequest;
+use HelgeSverre\Snov\Requests\DripCampaigns\ViewSentEmailsRequest;
 use Saloon\Http\BaseResource;
 use Saloon\Http\Response;
 
@@ -15,7 +23,7 @@ class DripCampaigns extends BaseResource
         $campaignId,
         $status,
     ): Response {
-        return $this->connector->send(new \HelgeSverre\Snov\Requests\DripCampaigns\ChangeRecipientsStatusRequest(
+        return $this->connector->send(new ChangeRecipientsStatusRequest(
             email: $email,
             campaignId: $campaignId,
             status: $status,
@@ -28,18 +36,19 @@ class DripCampaigns extends BaseResource
     public function seeListOfCompletedProspects(
         $campaignId,
     ): Response {
-        return $this->connector->send(new \HelgeSverre\Snov\Requests\DripCampaigns\SeeListOfCompletedProspectsRequest(
+        return $this->connector->send(new SeeListOfCompletedProspectsRequest(
             campaignId: $campaignId,
         ));
     }
 
     /**
-     * This method returns the campaign replies with all the information, including the prospect’s name, ID, campaign, etc.
+     * This method returns the campaign replies with all the information, including the
+     * prospect’s name, ID, campaign, etc.
      */
     public function seeCampaignReplies(
         $campaignId,
     ): Response {
-        return $this->connector->send(new \HelgeSverre\Snov\Requests\DripCampaigns\SeeCampaignRepliesRequest(
+        return $this->connector->send(new SeeCampaignRepliesRequest(
             campaignId: $campaignId,
         ));
     }
@@ -50,18 +59,19 @@ class DripCampaigns extends BaseResource
     public function getInfoAboutCampaignOpens(
         $campaignId,
     ): Response {
-        return $this->connector->send(new \HelgeSverre\Snov\Requests\DripCampaigns\GetInfoAboutCampaignOpensRequest(
+        return $this->connector->send(new GetInfoAboutCampaignOpensRequest(
             campaignId: $campaignId,
         ));
     }
 
     /**
-     * This method returns information on all campaign recipients that have clicked a link in one of campaign emails.
+     * This method returns information on all campaign recipients that have clicked a
+     * link in one of campaign emails.
      */
     public function checkLinkClicks(
         $campaignId,
     ): Response {
-        return $this->connector->send(new \HelgeSverre\Snov\Requests\DripCampaigns\CheckLinkClicksRequest(
+        return $this->connector->send(new CheckLinkClicksRequest(
             campaignId: $campaignId,
         ));
     }
@@ -72,7 +82,7 @@ class DripCampaigns extends BaseResource
     public function viewSentEmails(
         $campaignId,
     ): Response {
-        return $this->connector->send(new \HelgeSverre\Snov\Requests\DripCampaigns\ViewSentEmailsRequest(
+        return $this->connector->send(new ViewSentEmailsRequest(
             campaignId: $campaignId,
         ));
     }
@@ -82,19 +92,20 @@ class DripCampaigns extends BaseResource
      */
     public function viewAllCampaigns(
     ): Response {
-        return $this->connector->send(new \HelgeSverre\Snov\Requests\DripCampaigns\ViewAllCampaignsRequest(
+        return $this->connector->send(new ViewAllCampaignsRequest(
         ));
     }
 
     /**
      * Using this method you can add an email or a domain to your Do-not-email List.
-     *  After this email/domain has been added to the list, you won't be able to send emails to it.
+     * After this email/domain has been added to the list, you won't be able to send
+     * emails to it.
      */
     public function addToDoNotEmailList(
         $items,
         $listId,
     ): Response {
-        return $this->connector->send(new \HelgeSverre\Snov\Requests\DripCampaigns\AddToDoNotEmailListRequest(
+        return $this->connector->send(new AddToDoNotEmailListRequest(
             items: $items,
             listId: $listId,
         ));

@@ -13,7 +13,7 @@ class EmailVerifierRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed The email addresses you need to verify.
+     * @param  mixed  $emails  The email addresses you need to verify.
      **/
     public function __construct(
         protected mixed $emails,

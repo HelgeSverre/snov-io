@@ -14,7 +14,7 @@ class FindProspectByIDRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed The prospect’s id. You can see it in the response when you add a prospect via Add prospect to list API method or in the URL when you view prospect’s page (see an example).
+     * @param  mixed  $id  The prospect’s id. You can see it in the response when you add a prospect via Add prospect to list API method or in the URL when you view prospect’s page (see an example).
      **/
     public function __construct(
         protected mixed $id,

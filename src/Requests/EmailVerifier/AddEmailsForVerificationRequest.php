@@ -13,7 +13,7 @@ class AddEmailsForVerificationRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed A list of email addresses you need to add to the verification queue. Each request can contain up to 10 emails.
+     * @param  mixed  $emails  A list of email addresses you need to add to the verification queue. Each request can contain up to 10 emails.
      **/
     public function __construct(
         protected mixed $emails,

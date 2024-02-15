@@ -4,16 +4,13 @@ namespace HelgeSverre\Snov\Requests\DripCampaigns;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Saloon\Traits\Body\HasJsonBody;
 
 class SeeListOfCompletedProspectsRequest extends Request
 {
-    use HasJsonBody;
-
     protected Method $method = Method::GET;
 
     /**
-     * @var mixed Сampaign's unique identifier to retrieve the prospects list.
+     * @param  mixed  $campaignId  Сampaign's unique identifier to retrieve the prospects list.
      **/
     public function __construct(
         protected mixed $campaignId,
@@ -25,7 +22,7 @@ class SeeListOfCompletedProspectsRequest extends Request
         return '/v1/prospect-finished';
     }
 
-    public function defaultBody(): array
+    public function defaultQuery(): array
     {
         return array_filter([
             'campaignId' => $this->campaignId,

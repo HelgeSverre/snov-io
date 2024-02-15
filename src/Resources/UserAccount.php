@@ -2,6 +2,7 @@
 
 namespace HelgeSverre\Snov\Resources;
 
+use HelgeSverre\Snov\Requests\UserAccount\CheckUserBalanceRequest;
 use Saloon\Http\BaseResource;
 use Saloon\Http\Response;
 
@@ -12,7 +13,7 @@ class UserAccount extends BaseResource
      */
     public function checkUserBalance(
     ): Response {
-        return $this->connector->send(new \HelgeSverre\Snov\Requests\UserAccount\CheckUserBalanceRequest(
+        return $this->connector->send(new CheckUserBalanceRequest(
         ));
     }
 }

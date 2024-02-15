@@ -13,9 +13,9 @@ class EmailFinderRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed The email address owner`s first name.
-     * @var mixed The email address owner`s last name.
-     * @var mixed The domain name of the company that is used in the email address.
+     * @param  mixed  $firstName  The email address owner`s first name.
+     * @param  mixed  $lastName  The email address owner`s last name.
+     * @param  mixed  $domain  The domain name of the company that is used in the email address.
      **/
     public function __construct(
         protected mixed $firstName,

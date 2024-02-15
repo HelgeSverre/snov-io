@@ -41,14 +41,18 @@ foreach ($endpoints as $endpoint) {
     $classContent .= "use Saloon\Http\Response;\n";
     $classContent .= "use Saloon\Traits\Body\HasJsonBody;\n";
     $classContent .= "class $className extends Request\n{\n";
-    $classContent .= "use HasJsonBody;\n";
-    $classContent .= 'protected Method $method = Method::'.strtoupper($endpoint['method']).";\n\n";
 
-    // Constructor docblocks
+    if ($method != 'GET') {
+        $classContent .= "use HasJsonBody;\n";
+    }
+
+    $classContent .= 'protected Method $method = Method::'.$method.";\n\n";
+
+    // Constructor DocBlock
     $classContent .= "/**\n";
     foreach ($parameters as $param) {
         $name = Str::of($param['name'])->before('[')->trim()->camel();
-        $classContent .= "\n* @var mixed $".$name.' '.$param['description'];
+        $classContent .= "\n* @param mixed $".$name.' '.$param['description'];
     }
     $classContent .= "\n **/\n";
 
@@ -64,16 +68,25 @@ foreach ($endpoints as $endpoint) {
     $classContent .= "public function resolveEndpoint(): string\n";
     $classContent .= "{\n return '$path'; }\n";
 
-    // defaultBody method
-    $classContent .= "public function defaultBody(): array\n    {\n";
-    $classContent .= "return array_filter([\n";
+    if (count($parameters)) {
+        // defaultBody method
 
-    foreach ($parameters as $param) {
-        $classContent .= "'".($param['name'])."' => \$this->".Str::camel($param['name']).",\n";
+        if ($method == 'GET') {
+            $classContent .= "public function defaultQuery(): array\n    {\n";
+        } else {
+            $classContent .= "public function defaultBody(): array\n    {\n";
+        }
+
+        $classContent .= "return array_filter([\n";
+
+        foreach ($parameters as $param) {
+            $classContent .= "'".($param['name'])."' => \$this->".Str::camel($param['name']).",\n";
+        }
+
+        $classContent .= "]);\n";
+        $classContent .= "}\n";
     }
-
-    $classContent .= "]);\n";
-    $classContent .= "}}\n";
+    $classContent .= "}\n";
 
     $out = "$target/Requests/$resource/$className.php";
 
@@ -99,16 +112,21 @@ foreach ($groups as $group => $endpoints) {
     $resourceName = Str::of($group)->camel()->ucfirst();
     $namespace = 'HelgeSverre\\Snov\\Resources';
     $classContent = "<?php\n\nnamespace $namespace;\n\n";
+    foreach ($endpoints as $endpoint) {
+        $methodName = Str::of($endpoint['title'])->remove(['’', '.'])->camel();
+        $requestClassName = ucfirst($methodName).'Request';
+        $classContent .= "use HelgeSverre\\Snov\\Requests\\$resourceName\\$requestClassName;\n";
+    }
+
     $classContent .= "use Saloon\\Http\\BaseResource;\n";
     $classContent .= "use Saloon\\Http\\Response;\n\n";
-
     $classContent .= "class {$resourceName} extends BaseResource\n{\n";
 
     foreach ($endpoints as $endpoint) {
         $methodName = Str::of($endpoint['title'])->remove(['’', '.'])->camel();
         $requestClassName = ucfirst($methodName).'Request';
-        $requestNamespace = "\\HelgeSverre\\Snov\\Requests\\$resourceName\\$requestClassName";
-        $description = Str::of($endpoint['description'])->squish()->replace('.', ".\n * ");
+
+        $description = Str::of($endpoint['description'])->squish()->wordWrap(80)->replace("\n", "\n* ");
 
         // Generate method for the endpoint
         $classContent .= "    /**\n";
@@ -125,7 +143,7 @@ foreach ($groups as $group => $endpoints) {
 
         $classContent .= "    ): Response\n";
         $classContent .= "    {\n";
-        $classContent .= "        return \$this->connector->send(new $requestNamespace(\n";
+        $classContent .= "        return \$this->connector->send(new $requestClassName(\n";
 
         foreach ($endpoint['inputParameters'] as $param) {
             $name = Str::of($param['name'])->before('[')->trim()->camel();

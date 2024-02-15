@@ -13,8 +13,8 @@ class AddToDoNotEmailListRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed Email or domain you want to add to your Do-not-email List.
-     * @var mixed The Do-not-email List identifier that emails and domains belong to.
+     * @param  mixed  $items  Email or domain you want to add to your Do-not-email List.
+     * @param  mixed  $listId  The Do-not-email List identifier that emails and domains belong to.
      **/
     public function __construct(
         protected mixed $items,

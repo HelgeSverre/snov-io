@@ -13,7 +13,7 @@ class EmailCountRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed The name of the domain for which you`d like to know the number of emails in our database.
+     * @param  mixed  $domain  The name of the domain for which you`d like to know the number of emails in our database.
      **/
     public function __construct(
         protected mixed $domain,

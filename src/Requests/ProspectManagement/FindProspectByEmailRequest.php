@@ -13,7 +13,7 @@ class FindProspectByEmailRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed The prospect’s email address.
+     * @param  mixed  $email  The prospect’s email address.
      **/
     public function __construct(
         protected mixed $email,

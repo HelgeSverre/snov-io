@@ -13,9 +13,9 @@ class ViewProspectsInListRequest extends Request
     protected Method $method = Method::POST;
 
     /**
-     * @var mixed The list’s unique identifier.
-     * @var mixed You can choose on which page of the list you would like to begin your search. This field is optional.
-     * @var mixed You can choose on which page of the list you would like to end your search. This field is optional. Maximum value is 100.
+     * @param  mixed  $listId  The list’s unique identifier.
+     * @param  mixed  $page  You can choose on which page of the list you would like to begin your search. This field is optional.
+     * @param  mixed  $perPage  You can choose on which page of the list you would like to end your search. This field is optional. Maximum value is 100.
      **/
     public function __construct(
         protected mixed $listId,
