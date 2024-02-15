@@ -2,11 +2,11 @@
 
 namespace HelgeSverre\Snov;
 
-use HelgeSverre\Snov\Resource\DripCampaigns;
-use HelgeSverre\Snov\Resource\EmailFinder;
-use HelgeSverre\Snov\Resource\EmailVerifier;
-use HelgeSverre\Snov\Resource\ProspectManagement;
-use HelgeSverre\Snov\Resource\UserAccount;
+use HelgeSverre\Snov\Resources\DripCampaigns;
+use HelgeSverre\Snov\Resources\EmailFinder;
+use HelgeSverre\Snov\Resources\EmailVerifier;
+use HelgeSverre\Snov\Resources\ProspectManagement;
+use HelgeSverre\Snov\Resources\UserAccount;
 use Saloon\Http\Connector;
 use Saloon\Traits\Plugins\AcceptsJson;
 use Saloon\Traits\Plugins\HasTimeout;
