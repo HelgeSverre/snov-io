@@ -4,15 +4,38 @@ require './vendor/autoload.php';
 
 use Symfony\Component\DomCrawler\Crawler;
 
-function extractAllApiDocumentation(string $htmlContent): array
+function extractApiGroups(string $htmlContent): array
+{
+    $crawler = new Crawler($htmlContent);
+    $apiGroups = [];
+
+    // Extract groups from the sidebar
+    $crawler->filter('aside#api-mobile-switcher ul > li.has-ul')->each(function (Crawler $node) use (&$apiGroups) {
+        $groupName = trim($node->filter('p')->text());
+        $apiGroups[] = [];
+
+        // Extract endpoints within the group
+        $node->filter('ul.nested li a')->each(function (Crawler $childNode) use (&$apiGroups, $groupName) {
+            $apiGroups[] = [
+                'id' => trim($childNode->attr('href'), '#'),
+                'group' => $groupName,
+            ];
+        });
+    });
+
+    return $apiGroups;
+}
+
+function extractAllApiDocumentation(string $htmlContent, $groups): array
 {
     $crawler = new Crawler($htmlContent);
     $apiEndpoints = [];
 
     // Select all paragraph-wrapper blocks
-    $crawler->filter('#APIMethods ~ .paragraph-wrapper')->each(function (Crawler $node) use (&$apiEndpoints) {
+    $crawler->filter('#APIMethods ~ .paragraph-wrapper')->each(function (Crawler $node) use ($groups, &$apiEndpoints) {
         $endpoint = [
             'id' => '',
+            'group' => 'Misc',
             'title' => '',
             'method' => '',
             'description' => '',
@@ -24,6 +47,8 @@ function extractAllApiDocumentation(string $htmlContent): array
         // Extract the title and method
         $titleElement = $node->filter('.title-h5');
         $endpoint['id'] = $node->attr('id');
+
+        $endpoint['group'] = collect($groups)->firstWhere('id', $endpoint['id'])['group'] ?? 'N/A';
 
         if ($titleElement->count()) {
             $endpoint['title'] = $titleElement->innerText();
@@ -48,8 +73,12 @@ function extractAllApiDocumentation(string $htmlContent): array
         // Extract input parameters
         $inputParametersElements = $node->filter('.title-h5:contains("Input parameters") + .table.code tbody tr');
         $endpoint['inputParameters'] = $inputParametersElements->each(function (Crawler $node) {
-            $name = $node->filter('td div.color-one')->count() ? trim($node->filter('td div.color-one')->text()) : 'N/A';
-            $description = $node->filter('td:nth-child(2)')->count() ? trim($node->filter('td:nth-child(2)')->text()) : 'N/A';
+            $name = $node->filter('td div.color-one')->count() ? trim($node->filter('td div.color-one')->text()) : null;
+            $description = $node->filter('td:nth-child(2)')->count() ? trim($node->filter('td:nth-child(2)')->text()) : null;
+
+            if (! $name) {
+                return null;
+            }
 
             return ['name' => $name, 'description' => $description];
         });
@@ -57,14 +86,20 @@ function extractAllApiDocumentation(string $htmlContent): array
         // Extract output parameters
         $outputParametersElements = $node->filter('.table.code.no-margin-bottom tbody tr');
         $endpoint['outputParameters'] = $outputParametersElements->each(function (Crawler $node) {
-            $name = $node->filter('td div.color-one')->count() ? trim($node->filter('td div.color-one')->text()) : 'N/A';
-            $description = $node->filter('td:nth-child(2)')->count() ? trim($node->filter('td:nth-child(2)')->text()) : 'N/A';
+            $name = $node->filter('td div.color-one')->count() ? trim($node->filter('td div.color-one')->text()) : null;
+            $description = $node->filter('td:nth-child(2)')->count() ? trim($node->filter('td:nth-child(2)')->text()) : null;
+
+            if (! $name) {
+                return null;
+            }
 
             return ['name' => $name, 'description' => $description];
         });
 
+        $endpoint['inputParameters'] = array_filter($endpoint['inputParameters']);
+        $endpoint['outputParameters'] = array_filter($endpoint['outputParameters']);
+
         $apiEndpoints[] = $endpoint;
-        echo "\033[103m\033[30m".str_pad($endpoint['method'], 6, ' ', STR_PAD_BOTH)."\033[0m".'  '."\033[34m".$endpoint['endpoint']."\033[0m"."\n";
     });
 
     return $apiEndpoints;
@@ -73,8 +108,10 @@ function extractAllApiDocumentation(string $htmlContent): array
 $filepath = 'api.json';
 
 $html = file_get_contents('https://snov.io/api');
-$spec = extractAllApiDocumentation($html);
 
-$json = json_encode($spec, JSON_PRETTY_PRINT);
+$groups = extractApiGroups($html);
+$apiDocumentation = extractAllApiDocumentation($html, $groups);
+
+$json = json_encode($apiDocumentation, JSON_PRETTY_PRINT);
 
 file_put_contents($filepath, $json);

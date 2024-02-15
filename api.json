@@ -1,6 +1,7 @@
 [
     {
         "id": "DomainSearch2",
+        "group": "Email Finder",
         "title": "Domain search V.2",
         "method": "GET",
         "description": "Enter a domain name and Snov.io will return all the email addresses on the domain.If there is any additional information about the email owner available in the database, we will add it as well.Each response returns up to 100 emails. If it does not return at least one email, you will not be charged for the request.",
@@ -88,6 +89,7 @@
     },
     {
         "id": "EmailCount",
+        "group": "Email Finder",
         "title": "Email count",
         "method": "POST",
         "description": "With this API method, you can find out the number of email addresses from a certain domain in our database. It`s completely free, so you don`t need credits to use it!",
@@ -115,6 +117,7 @@
     },
     {
         "id": "EmailFinder",
+        "group": "Email Finder",
         "title": "Email Finder",
         "method": "POST",
         "description": "This API method finds email addresses using the person`s first and last name, and a domain name. If we don`t have this email address in our database, we won`t be able to provide the results to you right away. To speed up the process, you can use the Add Names To Find Emails method to push this email address for search. After that, try the Email Finder method again.",
@@ -166,6 +169,7 @@
     },
     {
         "id": "AddNamestoFindEmails",
+        "group": "Email Finder",
         "title": "Add names to find emails",
         "method": "POST",
         "description": "If Snov.io does not have the emails you are looking for in its database and can't provide these email addresses via the Email Finder, you can try to push the request for email search using this method. If an email is found, you can collect it by using the free Email Finder request again.",
@@ -188,6 +192,7 @@
     },
     {
         "id": "FindProspectbyUrl",
+        "group": "Email Finder",
         "title": "Add URL to search for prospect",
         "method": "POST",
         "description": "Find prospects by social URL. To receive the results, use the Get prospect with URL method.",
@@ -211,6 +216,7 @@
     },
     {
         "id": "GetEmailsFromUrl",
+        "group": "Email Finder",
         "title": "Get prospect with URL",
         "method": "POST",
         "description": "Provide the prospect's social URL and Snov.io will return the full information on the prospect with the found email addresses. You should previously use the Add URL to search for prospect method. Otherwise, the result will not be shown.",
@@ -282,6 +288,7 @@
     },
     {
         "id": "GetProfileByEmail",
+        "group": "Email Finder",
         "title": "Get profile with email",
         "method": "POST",
         "description": "Provide an email address and Snov.io will return all the profile information connected to the provided email address owner from the database.If we find no information about the email owner in our database, you will not be charged for the request.",
@@ -349,6 +356,7 @@
     },
     {
         "id": "EmailVerifier",
+        "group": "Email Verifier",
         "title": "Email Verifier",
         "method": "POST",
         "description": "Check if the provided email addresses are valid and deliverable. API endpoint will return the email verification results. If we haven\u2019t verified a certain email address before, the results will not be returned to you. In this case, the API will return a \u201cnot_verified\u201d identifier and you will not be charged credits for this email. You should use the Add emails for verification method to push this email address for verification, after which you will be able to get the email verification results using this endpoint. This method will return data for each requested email address. The response contains an email verification status and verification results.",
@@ -415,15 +423,12 @@
             {
                 "name": "isConnectionError",
                 "description": "Is true when an error occurs on a client's server side during our attempt to establish a connection."
-            },
-            {
-                "name": "N\/A",
-                "description": "N\/A"
             }
         ]
     },
     {
         "id": "AddEmailsforVerification",
+        "group": "Email Verifier",
         "title": "Add emails for verification",
         "method": "POST",
         "description": "If you've never verified a certain email address before, you should push it for verification using this API method. After performing this action, you can receive the verification results using the Email Verifier.",
@@ -438,6 +443,7 @@
     },
     {
         "id": "ChangerecipientsStatus",
+        "group": "Drip Campaigns",
         "title": "Change recipient\u2019s status",
         "method": "POST",
         "description": "Change the status of a recipient in a specific campaign.",
@@ -460,6 +466,7 @@
     },
     {
         "id": "ListOfFinishedProspects",
+        "group": "Drip Campaigns",
         "title": "See list of completed prospects",
         "method": "GET",
         "description": "This method returns prospects for whom the campaign has been completed.",
@@ -495,6 +502,7 @@
     },
     {
         "id": "CampaignReplies",
+        "group": "Drip Campaigns",
         "title": "See campaign replies",
         "method": "GET",
         "description": "This method returns the campaign replies with all the information, including the prospect\u2019s name, ID, campaign, etc.",
@@ -530,6 +538,7 @@
     },
     {
         "id": "OpenEmails",
+        "group": "Drip Campaigns",
         "title": "Get info about campaign opens",
         "method": "GET",
         "description": "This method shows the information about the opened emails in the campaign.",
@@ -565,6 +574,7 @@
     },
     {
         "id": "EmailsClicked",
+        "group": "Drip Campaigns",
         "title": "Check link clicks",
         "method": "GET",
         "description": "This method returns information on all campaign recipients that have clicked a link in one of campaign emails.",
@@ -608,6 +618,7 @@
     },
     {
         "id": "EmailsSent",
+        "group": "Drip Campaigns",
         "title": "View sent emails",
         "method": "GET",
         "description": "This method shows the information about sent emails in the campaign.",
@@ -639,16 +650,12 @@
     },
     {
         "id": "UserCampaigns",
+        "group": "Drip Campaigns",
         "title": "View all campaigns",
         "method": "GET",
         "description": "This method shows the list of all user campaigns.",
         "endpoint": "https:\/\/api.snov.io\/v1\/get-user-campaigns",
-        "inputParameters": [
-            {
-                "name": "N\/A",
-                "description": "N\/A"
-            }
-        ],
+        "inputParameters": [],
         "outputParameters": [
             {
                 "name": "id",
@@ -682,6 +689,7 @@
     },
     {
         "id": "AddTODoNotEmailList",
+        "group": "Drip Campaigns",
         "title": "Add to Do-not-email List",
         "method": "POST",
         "description": "Using this method you can add an email or a domain to your Do-not-email List. After this email\/domain has been added to the list, you won't be able to send emails to it.",
@@ -705,6 +713,7 @@
     },
     {
         "id": "AddProspectToList",
+        "group": "Prospect Management",
         "title": "Add prospect to list",
         "method": "POST",
         "description": "Add prospect to a specific list. This method will be useful for those who want to automate adding prospects to lists with active email drip campaigns. This way after a prospect is automatically added to a chosen list, an email drip campaign will be started for them automatically.",
@@ -792,6 +801,7 @@
     },
     {
         "id": "FindProspectbyID",
+        "group": "Prospect Management",
         "title": "Find prospect by ID",
         "method": "POST",
         "description": "Find prospects from your lists by id. Knowing the id of a specific prospect you can get full information on the prospect, including the lists and campaigns they\u2019ve been added to.",
@@ -863,6 +873,7 @@
     },
     {
         "id": "FindProspectbyEmail",
+        "group": "Prospect Management",
         "title": "Find prospect by email",
         "method": "POST",
         "description": "Find prospect from your lists by email address. When you search by email, you receive a list of all prospects tied to this email address. Every element of the list contains full information on the prospect, including the lists and campaigns they\u2019ve been added to.",
@@ -934,16 +945,12 @@
     },
     {
         "id": "FindProspectsCustomFields",
+        "group": "Prospect Management",
         "title": "Find prospect\u2019s custom fields",
         "method": "GET",
         "description": "This method returns a list of all custom fields created by the user, including the fields\u2019 name, whether the field is optional or required, and the field\u2019s data type.",
         "endpoint": "https:\/\/api.snov.io\/v1\/prospect-custom-fields",
-        "inputParameters": [
-            {
-                "name": "N\/A",
-                "description": "N\/A"
-            }
-        ],
+        "inputParameters": [],
         "outputParameters": [
             {
                 "name": "key",
@@ -965,16 +972,12 @@
     },
     {
         "id": "UserLists",
+        "group": "Prospect Management",
         "title": "See user lists",
         "method": "GET",
         "description": "This method returns all lists created by the user. You can use this method to review lists that can be used for an email drip campaign.",
         "endpoint": "https:\/\/api.snov.io\/v1\/get-user-lists",
-        "inputParameters": [
-            {
-                "name": "N\/A",
-                "description": "N\/A"
-            }
-        ],
+        "inputParameters": [],
         "outputParameters": [
             {
                 "name": "id",
@@ -1004,6 +1007,7 @@
     },
     {
         "id": "ViewProspectsInList",
+        "group": "Prospect Management",
         "title": "View prospects in list",
         "method": "POST",
         "description": "This method returns all the data on prospects in a specific list, including prospect\u2019s data like email addresses and their status.",
@@ -1063,6 +1067,7 @@
     },
     {
         "id": "CreateNewProspectList",
+        "group": "Prospect Management",
         "title": "Create new prospect list",
         "method": "POST",
         "description": "Use this method to create new prospect lists in your account.",
@@ -1082,16 +1087,12 @@
     },
     {
         "id": "CheckUserBalance",
+        "group": "User Account",
         "title": "Check user balance",
         "method": "GET",
         "description": "Use this method to check your credit balance.",
         "endpoint": "https:\/\/api.snov.io\/v1\/get-balance",
-        "inputParameters": [
-            {
-                "name": "N\/A",
-                "description": "N\/A"
-            }
-        ],
+        "inputParameters": [],
         "outputParameters": [
             {
                 "name": "balance",
