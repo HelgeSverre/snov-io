@@ -4,7 +4,6 @@ namespace HelgeSverre\Snov\Requests\ProspectManagement;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Saloon\Http\Response;
 use Saloon\Traits\Body\HasJsonBody;
 
 class FindProspectByIDRequest extends Request

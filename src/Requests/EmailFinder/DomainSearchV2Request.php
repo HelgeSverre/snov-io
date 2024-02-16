@@ -4,7 +4,6 @@ namespace HelgeSverre\Snov\Requests\EmailFinder;
 
 use Saloon\Enums\Method;
 use Saloon\Http\Request;
-use Saloon\Http\Response;
 
 class DomainSearchV2Request extends Request
 {
