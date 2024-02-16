@@ -7,6 +7,7 @@ use HelgeSverre\Snov\Resources\EmailFinder;
 use HelgeSverre\Snov\Resources\EmailVerifier;
 use HelgeSverre\Snov\Resources\ProspectManagement;
 use HelgeSverre\Snov\Resources\UserAccount;
+use HelgeSverre\Snov\Resources\Webhooks;
 use Saloon\Helpers\OAuth2\OAuthConfig;
 use Saloon\Http\Connector;
 use Saloon\Traits\OAuth2\ClientCredentialsGrant;
@@ -62,5 +63,10 @@ class Snov extends Connector
     public function userAccount(): UserAccount
     {
         return new UserAccount($this);
+    }
+
+    public function webhooks(): Webhooks
+    {
+        return new Webhooks($this);
     }
 }

@@ -112,6 +112,15 @@ Snov::prospectManagement()->createNewProspectList($name);
 Snov::userAccount()->checkUserBalance();
 ```
 
+### Resource: Webhooks
+
+```php
+Snov::webhooks()->listAllWebhooks();
+Snov::webhooks()->addWebhook($eventObject, $eventAction, $endpointUrl,);
+Snov::webhooks()->changeWebhookStatus($status,);
+Snov::webhooks()->deleteAWebhook();
+```
+
 ## Development
 
 Snov.io does not have an API specification publicly available, however their API docs are fairly structured and can be
