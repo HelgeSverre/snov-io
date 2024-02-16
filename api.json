@@ -1115,5 +1115,183 @@
                 "description": "Days till the end of subscription."
             }
         ]
+    },
+    {
+        "id": "all-webhooks",
+        "group": "Webhooks",
+        "title": "List all webhooks",
+        "method": "GET",
+        "description": "This API method allows you to get a list of webhooks on your account. The response returns a collection of webhook models. The properties of the model are listed below:",
+        "endpoint": "https:\/\/api.snov.io\/v2\/webhooks",
+        "inputParameters": [],
+        "outputParameters": [
+            {
+                "name": "data",
+                "description": "array"
+            },
+            {
+                "name": "id",
+                "description": "int"
+            },
+            {
+                "name": "end_point",
+                "description": "string"
+            },
+            {
+                "name": "event_object",
+                "description": "string"
+            },
+            {
+                "name": "event_action",
+                "description": "string"
+            },
+            {
+                "name": "created_at",
+                "description": "int"
+            },
+            {
+                "name": "status",
+                "description": "string"
+            },
+            {
+                "name": "meta",
+                "description": "object"
+            },
+            {
+                "name": "webhooks_count",
+                "description": "int"
+            },
+            {
+                "name": "user_id",
+                "description": "int"
+            }
+        ]
+    },
+    {
+        "id": "add-webhooks",
+        "group": "Webhooks",
+        "title": "Add webhook",
+        "method": "POST",
+        "description": "This API method allows you to create a webhook subscription and receive event notifications to the specified endpoint URL. The response returns a model of the added webhook. The properties of the model are listed below:",
+        "endpoint": "https:\/\/api.snov.io\/v2\/webhooks",
+        "inputParameters": [
+            {
+                "name": "event_object",
+                "description": "the object the action is performed on (list of supported objects)"
+            },
+            {
+                "name": "event_action",
+                "description": "the action performed on the object (list of supported actions)"
+            },
+            {
+                "name": "endpoint_url",
+                "description": "the URL address where the webhook is sent"
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "data",
+                "description": "object"
+            },
+            {
+                "name": "id",
+                "description": "int"
+            },
+            {
+                "name": "end_point",
+                "description": "string"
+            },
+            {
+                "name": "event_object",
+                "description": "string"
+            },
+            {
+                "name": "event_action",
+                "description": "string"
+            },
+            {
+                "name": "created_at",
+                "description": "int"
+            },
+            {
+                "name": "status",
+                "description": "string"
+            },
+            {
+                "name": "meta",
+                "description": "object"
+            },
+            {
+                "name": "user_id",
+                "description": "int"
+            }
+        ]
+    },
+    {
+        "id": "change-webhooks",
+        "group": "Webhooks",
+        "title": "Change webhook status",
+        "method": "PUT",
+        "description": "Changes the status of a chosen webhook subscription. Include the unique \u201cid\u201d value of the chosen webhook at the end of the request URL address. Use List all webhooks method to get id values of your webhooks. The response returns a model of the added webhook. The properties of the model are listed below:",
+        "endpoint": "https:\/\/api.snov.io\/v2\/webhooks\/webhook_id",
+        "inputParameters": [
+            {
+                "name": "status",
+                "description": "active or deactivated"
+            }
+        ],
+        "outputParameters": [
+            {
+                "name": "data",
+                "description": "object"
+            },
+            {
+                "name": "id",
+                "description": "int"
+            },
+            {
+                "name": "end_point",
+                "description": "string"
+            },
+            {
+                "name": "event_object",
+                "description": "string"
+            },
+            {
+                "name": "event_action",
+                "description": "string"
+            },
+            {
+                "name": "created_at",
+                "description": "int"
+            },
+            {
+                "name": "status",
+                "description": "string"
+            },
+            {
+                "name": "meta",
+                "description": "object"
+            },
+            {
+                "name": "user_id",
+                "description": "int"
+            }
+        ]
+    },
+    {
+        "id": "delete-webhooks",
+        "group": "Webhooks",
+        "title": "Delete a webhook",
+        "method": "DELETE",
+        "description": "Deletes a chosen webhook. Include the unique \u201cid\u201d value of the chosen webhook at the end of the request URL address. Use List all webhooks method to get id values of your webhooks. The response returns a collection of webhook models. The properties of the model are listed below:",
+        "endpoint": "https:\/\/api.snov.io\/v2\/webhooks\/webhook_id",
+        "inputParameters": [],
+        "outputParameters": [
+            {
+                "name": "success",
+                "description": "boolean"
+            }
+        ]
     }
 ]
