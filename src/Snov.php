@@ -7,7 +7,9 @@ use HelgeSverre\Snov\Resources\EmailFinder;
 use HelgeSverre\Snov\Resources\EmailVerifier;
 use HelgeSverre\Snov\Resources\ProspectManagement;
 use HelgeSverre\Snov\Resources\UserAccount;
+use Saloon\Helpers\OAuth2\OAuthConfig;
 use Saloon\Http\Connector;
+use Saloon\Traits\OAuth2\ClientCredentialsGrant;
 use Saloon\Traits\Plugins\AcceptsJson;
 use Saloon\Traits\Plugins\HasTimeout;
 use SensitiveParameter;
@@ -15,12 +17,21 @@ use SensitiveParameter;
 class Snov extends Connector
 {
     use AcceptsJson;
+    use ClientCredentialsGrant;
     use HasTimeout;
 
     public function __construct(
         #[SensitiveParameter] protected readonly string $clientId,
         #[SensitiveParameter] protected readonly string $clientSecret,
     ) {
+    }
+
+    protected function defaultOauthConfig(): OAuthConfig
+    {
+        return OAuthConfig::make()
+            ->setClientId($this->clientId)
+            ->setClientSecret($this->clientSecret)
+            ->setTokenEndpoint('/v1/oauth/access_token');
     }
 
     public function resolveBaseUrl(): string
