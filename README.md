@@ -49,7 +49,7 @@ Snov::prospectManagement();
 Snov::userAccount();
 ```
 
-### Drip Campaigns
+### Resource: Drip Campaigns
 
 ```php
 Snov::dripCampaigns()->changeRecipientsStatus($email, $campaignId, $status);
@@ -61,7 +61,7 @@ Snov::dripCampaigns()->viewSentEmails($campaignId);
 Snov::dripCampaigns()->addToDoNotEmailList($items, $listId);
 ```
 
-### Email Finder
+### Resource: Email Finder
 
 ```php
 Snov::emailFinder()->domainSearchV2($domain, $type, $limit, $lastId, $positions);
