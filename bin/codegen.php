@@ -57,18 +57,24 @@ foreach ($endpoints as $endpoint) {
     $classContent .= "\n **/\n";
 
     // Constructor parameters
-    $classContent .= "public function __construct(\n";
-    foreach ($parameters as $param) {
-        $name = Str::of($param['name'])->before('[')->trim()->camel();
-        $classContent .= 'protected mixed $'.$name.",\n";
+    $classContent .= 'public function __construct(';
+
+    if ($parameters) {
+        $classContent .= "\n";
+
+        foreach ($parameters as $param) {
+            $name = Str::of($param['name'])->before('[')->trim()->camel();
+            $classContent .= 'protected mixed $'.$name.",\n";
+        }
     }
+
     $classContent .= ") {}\n";
 
     // resolveEndpoint method
     $classContent .= "public function resolveEndpoint(): string\n";
     $classContent .= "{\n return '$path'; }\n";
 
-    if (count($parameters)) {
+    if ($parameters) {
         // defaultBody method
 
         if ($method == 'GET') {
@@ -118,8 +124,7 @@ foreach ($groups as $group => $endpoints) {
         $classContent .= "use HelgeSverre\\Snov\\Requests\\$resourceName\\$requestClassName;\n";
     }
 
-    $classContent .= "use Saloon\\Http\\BaseResource;\n";
-    $classContent .= "use Saloon\\Http\\Response;\n\n";
+    $classContent .= "use Saloon\\Http\\BaseResource;\n\n";
     $classContent .= "class {$resourceName} extends BaseResource\n{\n";
 
     foreach ($endpoints as $endpoint) {
@@ -134,20 +139,28 @@ foreach ($groups as $group => $endpoints) {
         $classContent .= "     *\n";
         $classContent .= "     * @return Response\n";
         $classContent .= "     */\n";
-        $classContent .= "    public function $methodName(\n";
+        $classContent .= "    public function $methodName(";
 
-        foreach ($endpoint['inputParameters'] as $param) {
-            $name = Str::of($param['name'])->before('[')->trim()->camel();
-            $classContent .= '$'.$name.", \n";
+        if ($endpoint['inputParameters']) {
+
+            $classContent .= "\n";
+            foreach ($endpoint['inputParameters'] as $param) {
+                $name = Str::of($param['name'])->before('[')->trim()->camel();
+                $classContent .= '$'.$name.", \n";
+            }
         }
 
         $classContent .= "    ): Response\n";
         $classContent .= "    {\n";
-        $classContent .= "        return \$this->connector->send(new $requestClassName(\n";
+        $classContent .= "        return \$this->connector->send(new $requestClassName(";
 
-        foreach ($endpoint['inputParameters'] as $param) {
-            $name = Str::of($param['name'])->before('[')->trim()->camel();
-            $classContent .= $name.': $'.$name.", \n";
+        if ($endpoint['inputParameters']) {
+            $classContent .= "\n";
+
+            foreach ($endpoint['inputParameters'] as $param) {
+                $name = Str::of($param['name'])->before('[')->trim()->camel();
+                $classContent .= $name.': $'.$name.", \n";
+            }
         }
 
         $classContent .= "));\n";
