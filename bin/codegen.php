@@ -145,7 +145,7 @@ foreach ($groups as $group => $endpoints) {
             $classContent .= "\n";
             foreach ($endpoint['inputParameters'] as $param) {
                 $name = Str::of($param['name'])->before('[')->trim()->camel();
-                $classContent .= '$'.$name.", \n";
+                $classContent .= '$'.$name." = null, \n";
             }
         }
 
