@@ -41,7 +41,7 @@ $snov = new Snov(
     clientSecret: config('snov-io.client_secret')
 );
 
-// Or use the Facade (Laravel)
+// Or use the Facade
 Snov::dripCampaigns();
 Snov::emailFinder();
 Snov::emailVerifier();
