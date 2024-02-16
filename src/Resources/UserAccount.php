@@ -11,9 +11,8 @@ class UserAccount extends BaseResource
     /**
      * Use this method to check your credit balance.
      */
-    public function checkUserBalance(
-    ): Response {
-        return $this->connector->send(new CheckUserBalanceRequest(
-        ));
+    public function checkUserBalance(): Response
+    {
+        return $this->connector->send(new CheckUserBalanceRequest());
     }
 }

@@ -86,20 +86,18 @@ class ProspectManagement extends BaseResource
      * the fields’ name, whether the field is optional or required, and the field’s
      * data type.
      */
-    public function findProspectsCustomFields(
-    ): Response {
-        return $this->connector->send(new FindProspectsCustomFieldsRequest(
-        ));
+    public function findProspectsCustomFields(): Response
+    {
+        return $this->connector->send(new FindProspectsCustomFieldsRequest());
     }
 
     /**
      * This method returns all lists created by the user. You can use this method to
      * review lists that can be used for an email drip campaign.
      */
-    public function seeUserLists(
-    ): Response {
-        return $this->connector->send(new SeeUserListsRequest(
-        ));
+    public function seeUserLists(): Response
+    {
+        return $this->connector->send(new SeeUserListsRequest());
     }
 
     /**

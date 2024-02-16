@@ -90,10 +90,9 @@ class DripCampaigns extends BaseResource
     /**
      * This method shows the list of all user campaigns.
      */
-    public function viewAllCampaigns(
-    ): Response {
-        return $this->connector->send(new ViewAllCampaignsRequest(
-        ));
+    public function viewAllCampaigns(): Response
+    {
+        return $this->connector->send(new ViewAllCampaignsRequest());
     }
 
     /**
