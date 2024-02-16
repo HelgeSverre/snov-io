@@ -38,7 +38,6 @@ foreach ($endpoints as $endpoint) {
     $classContent .= trim('namespace HelgeSverre\Snov\Requests\\'.$resource, '\\').";\n\n";
     $classContent .= "use Saloon\Enums\Method;\n";
     $classContent .= "use Saloon\Http\Request;\n";
-    $classContent .= "use Saloon\Http\Response;\n";
     $classContent .= "use Saloon\Traits\Body\HasJsonBody;\n";
     $classContent .= "class $className extends Request\n{\n";
 
@@ -111,7 +110,6 @@ foreach ($endpoints as $endpoint) {
 }
 
 // Resource classes
-
 $groups = collect($endpoints)->groupBy('group');
 
 foreach ($groups as $group => $endpoints) {
@@ -124,7 +122,8 @@ foreach ($groups as $group => $endpoints) {
         $classContent .= "use HelgeSverre\\Snov\\Requests\\$resourceName\\$requestClassName;\n";
     }
 
-    $classContent .= "use Saloon\\Http\\BaseResource;\n\n";
+    $classContent .= "use Saloon\\Http\\BaseResource;\n";
+    $classContent .= "use Saloon\\Http\\Response;\n\n";
     $classContent .= "class {$resourceName} extends BaseResource\n{\n";
 
     foreach ($endpoints as $endpoint) {

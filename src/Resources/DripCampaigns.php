@@ -11,6 +11,7 @@ use HelgeSverre\Snov\Requests\DripCampaigns\SeeListOfCompletedProspectsRequest;
 use HelgeSverre\Snov\Requests\DripCampaigns\ViewAllCampaignsRequest;
 use HelgeSverre\Snov\Requests\DripCampaigns\ViewSentEmailsRequest;
 use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
 class DripCampaigns extends BaseResource
 {

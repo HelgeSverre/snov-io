@@ -5,6 +5,7 @@ namespace HelgeSverre\Snov\Resources;
 use HelgeSverre\Snov\Requests\EmailVerifier\AddEmailsForVerificationRequest;
 use HelgeSverre\Snov\Requests\EmailVerifier\EmailVerifierRequest;
 use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
 class EmailVerifier extends BaseResource
 {

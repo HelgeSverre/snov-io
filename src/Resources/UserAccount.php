@@ -4,6 +4,7 @@ namespace HelgeSverre\Snov\Resources;
 
 use HelgeSverre\Snov\Requests\UserAccount\CheckUserBalanceRequest;
 use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
 class UserAccount extends BaseResource
 {

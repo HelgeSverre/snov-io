@@ -7,6 +7,7 @@ use HelgeSverre\Snov\Requests\Webhooks\ChangeWebhookStatusRequest;
 use HelgeSverre\Snov\Requests\Webhooks\DeleteAWebhookRequest;
 use HelgeSverre\Snov\Requests\Webhooks\ListAllWebhooksRequest;
 use Saloon\Http\BaseResource;
+use Saloon\Http\Response;
 
 class Webhooks extends BaseResource
 {
