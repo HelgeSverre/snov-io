@@ -5,8 +5,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/helgesverre/snov-io.svg?style=flat-square)](https://packagist.org/packages/helgesverre/snov-io)
 [![Total Downloads](https://img.shields.io/packagist/dt/helgesverre/snov-io.svg?style=flat-square)](https://packagist.org/packages/helgesverre/snov-io)
 
-The Snov.io Laravel Client enables laravel applications to interact with the [Snov.io API](https://snov.io/api),
-providing straightforward access to features like email finder, email verifier, and more.
+The Snov.io Laravel Client enables laravel applications to interact with the [Snov.io API](https://snov.io/api).
 
 ## Installation
 
