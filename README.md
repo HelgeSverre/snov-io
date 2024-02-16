@@ -42,11 +42,11 @@ $snov = new Snov(
 );
 
 // Or use the Facade (Laravel)
-Snov::dripCampaigns()
-Snov::emailFinder()
-Snov::emailVerifier()
-Snov::prospectManagement()
-Snov::userAccount()
+Snov::dripCampaigns();
+Snov::emailFinder();
+Snov::emailVerifier();
+Snov::prospectManagement();
+Snov::userAccount();
 ```
 
 ### Drip Campaigns
