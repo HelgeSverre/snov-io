@@ -10,7 +10,6 @@ use HelgeSverre\Snov\Requests\ProspectManagement\FindProspectsCustomFieldsReques
 use HelgeSverre\Snov\Requests\ProspectManagement\SeeUserListsRequest;
 use HelgeSverre\Snov\Requests\ProspectManagement\ViewProspectsInListRequest;
 use Saloon\Http\BaseResource;
-use Saloon\Http\Response;
 
 class ProspectManagement extends BaseResource
 {

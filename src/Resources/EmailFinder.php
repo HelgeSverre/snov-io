@@ -10,7 +10,6 @@ use HelgeSverre\Snov\Requests\EmailFinder\EmailFinderRequest;
 use HelgeSverre\Snov\Requests\EmailFinder\GetProfileWithEmailRequest;
 use HelgeSverre\Snov\Requests\EmailFinder\GetProspectWithURLRequest;
 use Saloon\Http\BaseResource;
-use Saloon\Http\Response;
 
 class EmailFinder extends BaseResource
 {
