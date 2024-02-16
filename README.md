@@ -32,16 +32,46 @@ return [
 
 ## Usage
 
+### Creating an authenticated client
+
 ```php
 use HelgeSverre\Snov\Snov;
 
 // Instantiate the client
 $snov = new Snov(
-    clientId: config('snov-io.client_id')
-    clientSecret: config('snov-io.client_secret')
+    clientId: config('snov-io.client_id'),
+    clientSecret: config('snov-io.client_secret'),
 );
 
-// Or use the Facade
+// Authenticate the client
+$snov->authenticate($snov->getAccessToken());
+
+// Call the API with a request
+$snov->send(new EmailCountRequest(
+    domain: "snov.io",
+));
+```
+
+Creating an authenticated client is only necessary if you want to use the client to send individual requests manually,
+if you use the resource methods on the Snov class, the client will be authenticated automatically.
+
+```php
+$snov = new Snov(
+    clientId: config('snov-io.client_id'),
+    clientSecret: config('snov-io.client_secret'),
+);
+
+// No need to authenticate the client, the resource method will do it automatically
+$snov->emailFinder()->emailCount(
+    domain: "snov.io",
+);
+```
+
+### Using the Facade
+
+You can also use the Facade to access the Snov.io API.
+
+```php
 Snov::dripCampaigns();
 Snov::emailFinder();
 Snov::emailVerifier();

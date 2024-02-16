@@ -40,33 +40,38 @@ class Snov extends Connector
         return 'https://api.snov.io';
     }
 
+    public function getAuthenticatedClient(): self
+    {
+        return $this->authenticate($this->getAccessToken());
+    }
+
     public function dripCampaigns(): DripCampaigns
     {
-        return new DripCampaigns($this);
+        return new DripCampaigns($this->getAuthenticatedClient());
     }
 
     public function emailFinder(): EmailFinder
     {
-        return new EmailFinder($this);
+        return new EmailFinder($this->getAuthenticatedClient());
     }
 
     public function emailVerifier(): EmailVerifier
     {
-        return new EmailVerifier($this);
+        return new EmailVerifier($this->getAuthenticatedClient());
     }
 
     public function prospectManagement(): ProspectManagement
     {
-        return new ProspectManagement($this);
+        return new ProspectManagement($this->getAuthenticatedClient());
     }
 
     public function userAccount(): UserAccount
     {
-        return new UserAccount($this);
+        return new UserAccount($this->getAuthenticatedClient());
     }
 
     public function webhooks(): Webhooks
     {
-        return new Webhooks($this);
+        return new Webhooks($this->getAuthenticatedClient());
     }
 }
