@@ -31,76 +31,85 @@ function extractAllApiDocumentation(string $htmlContent, $groups): array
     $crawler = new Crawler($htmlContent);
     $apiEndpoints = [];
 
-    // Select all paragraph-wrapper blocks
-    $crawler->filter('#APIMethods ~ .paragraph-wrapper')->each(function (Crawler $node) use ($groups, &$apiEndpoints) {
-        $endpoint = [
-            'id' => '',
-            'group' => 'Misc',
-            'title' => '',
-            'method' => '',
-            'description' => '',
-            'endpoint' => '',
-            'inputParameters' => [],
-            'outputParameters' => [],
-        ];
+    $sections = [
+        // Regular API Endpoints
+        '#APIMethods ~ .paragraph-wrapper',
+        // The webhook endpoints are in a separate section, but the structure is the same.
+        '#webhooks-description ~ .paragraph-wrapper',
+    ];
 
-        // Extract the title and method
-        $titleElement = $node->filter('.title-h5');
-        $endpoint['id'] = $node->attr('id');
+    foreach ($sections as $section) {
 
-        $endpoint['group'] = collect($groups)->firstWhere('id', $endpoint['id'])['group'] ?? 'N/A';
+        $crawler->filter($section)->each(function (Crawler $node) use ($groups, &$apiEndpoints) {
+            $endpoint = [
+                'id' => '',
+                'group' => 'Misc',
+                'title' => '',
+                'method' => '',
+                'description' => '',
+                'endpoint' => '',
+                'inputParameters' => [],
+                'outputParameters' => [],
+            ];
 
-        if ($titleElement->count()) {
-            $endpoint['title'] = $titleElement->innerText();
-            $endpoint['method'] = $titleElement->filter('span')->text();
-        }
+            // Extract the title and method
+            $titleElement = $node->filter('.title-h5');
+            $endpoint['id'] = $node->attr('id');
 
-        // Extract the endpoint
-        $endpointElement = $node->filter('.code.dark tbody tr td a');
-        if ($endpointElement->count()) {
-            $endpoint['endpoint'] = $endpointElement->innerText();
-        }
+            $endpoint['group'] = collect($groups)->firstWhere('id', $endpoint['id'])['group'] ?? 'N/A';
 
-        // Extract descriptions
-        $descriptionElements = $node->filter('.description');
-        if ($descriptionElements->count()) {
-            $descriptions = $descriptionElements->each(function (Crawler $node) {
-                return trim($node->text());
+            if ($titleElement->count()) {
+                $endpoint['title'] = $titleElement->innerText();
+                $endpoint['method'] = $titleElement->filter('span')->text();
+            }
+
+            // Extract the endpoint
+            $endpointElement = $node->filter('.code.dark tbody tr td a');
+            if ($endpointElement->count()) {
+                $endpoint['endpoint'] = $endpointElement->innerText();
+            }
+
+            // Extract descriptions
+            $descriptionElements = $node->filter('.description');
+            if ($descriptionElements->count()) {
+                $descriptions = $descriptionElements->each(function (Crawler $node) {
+                    return trim($node->text());
+                });
+                $endpoint['description'] = implode(' ', $descriptions);
+            }
+
+            // Extract input parameters
+            $inputParametersElements = $node->filter('.title-h5:contains("Input parameters") + .table.code tbody tr');
+            $endpoint['inputParameters'] = $inputParametersElements->each(function (Crawler $node) {
+                $name = $node->filter('td div.color-one')->count() ? trim($node->filter('td div.color-one')->text()) : null;
+                $description = $node->filter('td:nth-child(2)')->count() ? trim($node->filter('td:nth-child(2)')->text()) : null;
+
+                if (! $name) {
+                    return null;
+                }
+
+                return ['name' => $name, 'description' => $description];
             });
-            $endpoint['description'] = implode(' ', $descriptions);
-        }
 
-        // Extract input parameters
-        $inputParametersElements = $node->filter('.title-h5:contains("Input parameters") + .table.code tbody tr');
-        $endpoint['inputParameters'] = $inputParametersElements->each(function (Crawler $node) {
-            $name = $node->filter('td div.color-one')->count() ? trim($node->filter('td div.color-one')->text()) : null;
-            $description = $node->filter('td:nth-child(2)')->count() ? trim($node->filter('td:nth-child(2)')->text()) : null;
+            // Extract output parameters
+            $outputParametersElements = $node->filter('.table.code.no-margin-bottom tbody tr');
+            $endpoint['outputParameters'] = $outputParametersElements->each(function (Crawler $node) {
+                $name = $node->filter('td div.color-one')->count() ? trim($node->filter('td div.color-one')->text()) : null;
+                $description = $node->filter('td:nth-child(2)')->count() ? trim($node->filter('td:nth-child(2)')->text()) : null;
 
-            if (! $name) {
-                return null;
-            }
+                if (! $name) {
+                    return null;
+                }
 
-            return ['name' => $name, 'description' => $description];
+                return ['name' => $name, 'description' => $description];
+            });
+
+            $endpoint['inputParameters'] = array_values(array_filter($endpoint['inputParameters']));
+            $endpoint['outputParameters'] = array_values(array_filter($endpoint['outputParameters']));
+
+            $apiEndpoints[] = $endpoint;
         });
-
-        // Extract output parameters
-        $outputParametersElements = $node->filter('.table.code.no-margin-bottom tbody tr');
-        $endpoint['outputParameters'] = $outputParametersElements->each(function (Crawler $node) {
-            $name = $node->filter('td div.color-one')->count() ? trim($node->filter('td div.color-one')->text()) : null;
-            $description = $node->filter('td:nth-child(2)')->count() ? trim($node->filter('td:nth-child(2)')->text()) : null;
-
-            if (! $name) {
-                return null;
-            }
-
-            return ['name' => $name, 'description' => $description];
-        });
-
-        $endpoint['inputParameters'] = array_filter($endpoint['inputParameters']);
-        $endpoint['outputParameters'] = array_filter($endpoint['outputParameters']);
-
-        $apiEndpoints[] = $endpoint;
-    });
+    }
 
     return $apiEndpoints;
 }
