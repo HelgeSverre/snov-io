@@ -21,7 +21,7 @@ class EmailVerifier extends BaseResource
      * status and verification results.
      */
     public function emailVerifier(
-        $emails,
+        $emails = null,
     ): Response {
         return $this->connector->send(new EmailVerifierRequest(
             emails: $emails,
@@ -34,7 +34,7 @@ class EmailVerifier extends BaseResource
      * receive the verification results using the Email Verifier.
      */
     public function addEmailsForVerification(
-        $emails,
+        $emails = null,
     ): Response {
         return $this->connector->send(new AddEmailsForVerificationRequest(
             emails: $emails,

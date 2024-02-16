@@ -21,20 +21,20 @@ class ProspectManagement extends BaseResource
      * will be started for them automatically.
      */
     public function addProspectToList(
-        $email,
-        $fullName,
-        $firstName,
-        $lastName,
-        $phones,
-        $country,
-        $locality,
-        $position,
-        $companyName,
-        $companySite,
-        $updateContact,
-        $customFields,
-        $socialLinks,
-        $listId,
+        $email = null,
+        $fullName = null,
+        $firstName = null,
+        $lastName = null,
+        $phones = null,
+        $country = null,
+        $locality = null,
+        $position = null,
+        $companyName = null,
+        $companySite = null,
+        $updateContact = null,
+        $customFields = null,
+        $socialLinks = null,
+        $listId = null,
     ): Response {
         return $this->connector->send(new AddProspectToListRequest(
             email: $email,
@@ -60,7 +60,7 @@ class ProspectManagement extends BaseResource
      * they’ve been added to.
      */
     public function findProspectByID(
-        $id,
+        $id = null,
     ): Response {
         return $this->connector->send(new FindProspectByIDRequest(
             id: $id,
@@ -74,7 +74,7 @@ class ProspectManagement extends BaseResource
      * campaigns they’ve been added to.
      */
     public function findProspectByEmail(
-        $email,
+        $email = null,
     ): Response {
         return $this->connector->send(new FindProspectByEmailRequest(
             email: $email,
@@ -105,9 +105,9 @@ class ProspectManagement extends BaseResource
      * prospect’s data like email addresses and their status.
      */
     public function viewProspectsInList(
-        $listId,
-        $page,
-        $perPage,
+        $listId = null,
+        $page = null,
+        $perPage = null,
     ): Response {
         return $this->connector->send(new ViewProspectsInListRequest(
             listId: $listId,
@@ -120,7 +120,7 @@ class ProspectManagement extends BaseResource
      * Use this method to create new prospect lists in your account.
      */
     public function createNewProspectList(
-        $name,
+        $name = null,
     ): Response {
         return $this->connector->send(new CreateNewProspectListRequest(
             name: $name,

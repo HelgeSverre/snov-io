@@ -19,9 +19,9 @@ class DripCampaigns extends BaseResource
      * Change the status of a recipient in a specific campaign.
      */
     public function changeRecipientsStatus(
-        $email,
-        $campaignId,
-        $status,
+        $email = null,
+        $campaignId = null,
+        $status = null,
     ): Response {
         return $this->connector->send(new ChangeRecipientsStatusRequest(
             email: $email,
@@ -34,7 +34,7 @@ class DripCampaigns extends BaseResource
      * This method returns prospects for whom the campaign has been completed.
      */
     public function seeListOfCompletedProspects(
-        $campaignId,
+        $campaignId = null,
     ): Response {
         return $this->connector->send(new SeeListOfCompletedProspectsRequest(
             campaignId: $campaignId,
@@ -46,7 +46,7 @@ class DripCampaigns extends BaseResource
      * prospect’s name, ID, campaign, etc.
      */
     public function seeCampaignReplies(
-        $campaignId,
+        $campaignId = null,
     ): Response {
         return $this->connector->send(new SeeCampaignRepliesRequest(
             campaignId: $campaignId,
@@ -57,7 +57,7 @@ class DripCampaigns extends BaseResource
      * This method shows the information about the opened emails in the campaign.
      */
     public function getInfoAboutCampaignOpens(
-        $campaignId,
+        $campaignId = null,
     ): Response {
         return $this->connector->send(new GetInfoAboutCampaignOpensRequest(
             campaignId: $campaignId,
@@ -69,7 +69,7 @@ class DripCampaigns extends BaseResource
      * link in one of campaign emails.
      */
     public function checkLinkClicks(
-        $campaignId,
+        $campaignId = null,
     ): Response {
         return $this->connector->send(new CheckLinkClicksRequest(
             campaignId: $campaignId,
@@ -80,7 +80,7 @@ class DripCampaigns extends BaseResource
      * This method shows the information about sent emails in the campaign.
      */
     public function viewSentEmails(
-        $campaignId,
+        $campaignId = null,
     ): Response {
         return $this->connector->send(new ViewSentEmailsRequest(
             campaignId: $campaignId,
@@ -101,8 +101,8 @@ class DripCampaigns extends BaseResource
      * emails to it.
      */
     public function addToDoNotEmailList(
-        $items,
-        $listId,
+        $items = null,
+        $listId = null,
     ): Response {
         return $this->connector->send(new AddToDoNotEmailListRequest(
             items: $items,

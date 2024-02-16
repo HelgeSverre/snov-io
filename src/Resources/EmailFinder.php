@@ -21,11 +21,11 @@ class EmailFinder extends BaseResource
      * it does not return at least one email, you will not be charged for the request.
      */
     public function domainSearchV2(
-        $domain,
-        $type,
-        $limit,
-        $lastId,
-        $positions,
+        $domain = null,
+        $type = null,
+        $limit = null,
+        $lastId = null,
+        $positions = null,
     ): Response {
         return $this->connector->send(new DomainSearchV2Request(
             domain: $domain,
@@ -42,7 +42,7 @@ class EmailFinder extends BaseResource
      * to use it!
      */
     public function emailCount(
-        $domain,
+        $domain = null,
     ): Response {
         return $this->connector->send(new EmailCountRequest(
             domain: $domain,
@@ -57,9 +57,9 @@ class EmailFinder extends BaseResource
      * search. After that, try the Email Finder method again.
      */
     public function emailFinder(
-        $firstName,
-        $lastName,
-        $domain,
+        $firstName = null,
+        $lastName = null,
+        $domain = null,
     ): Response {
         return $this->connector->send(new EmailFinderRequest(
             firstName: $firstName,
@@ -75,9 +75,9 @@ class EmailFinder extends BaseResource
      * collect it by using the free Email Finder request again.
      */
     public function addNamesToFindEmails(
-        $firstName,
-        $lastName,
-        $domain,
+        $firstName = null,
+        $lastName = null,
+        $domain = null,
     ): Response {
         return $this->connector->send(new AddNamesToFindEmailsRequest(
             firstName: $firstName,
@@ -91,7 +91,7 @@ class EmailFinder extends BaseResource
      * URL method.
      */
     public function addURLToSearchForProspect(
-        $url,
+        $url = null,
     ): Response {
         return $this->connector->send(new AddURLToSearchForProspectRequest(
             url: $url,
@@ -104,7 +104,7 @@ class EmailFinder extends BaseResource
      * Add URL to search for prospect method. Otherwise, the result will not be shown.
      */
     public function getProspectWithURL(
-        $url,
+        $url = null,
     ): Response {
         return $this->connector->send(new GetProspectWithURLRequest(
             url: $url,
@@ -118,7 +118,7 @@ class EmailFinder extends BaseResource
      * the request.
      */
     public function getProfileWithEmail(
-        $email,
+        $email = null,
     ): Response {
         return $this->connector->send(new GetProfileWithEmailRequest(
             email: $email,

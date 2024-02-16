@@ -27,9 +27,9 @@ class Webhooks extends BaseResource
      * added webhook. The properties of the model are listed below:
      */
     public function addWebhook(
-        $eventObject,
-        $eventAction,
-        $endpointUrl,
+        $eventObject = null,
+        $eventAction = null,
+        $endpointUrl = null,
     ): Response {
         return $this->connector->send(new AddWebhookRequest(
             eventObject: $eventObject,
@@ -45,7 +45,7 @@ class Webhooks extends BaseResource
      * of the added webhook. The properties of the model are listed below:
      */
     public function changeWebhookStatus(
-        $status,
+        $status = null,
     ): Response {
         return $this->connector->send(new ChangeWebhookStatusRequest(
             status: $status,
